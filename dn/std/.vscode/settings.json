@@ -1,0 +1,11 @@
+{
+    "deno.enable": true,
+    "deno.unstable": true,
+    "deno.lint": true,
+    "deno.enablePaths": [
+        "./.eng/tasks",
+        "./lib/.quasar",
+        "./testfx/.quasar",
+        "./cmdfx/.quasar",
+    ]
+}

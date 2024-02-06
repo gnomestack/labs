@@ -1,0 +1,43 @@
+<!--suppress MsbuildTargetFrameworkTagInspection -->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFx>$(LibFx)</TargetFx>
+    <TargetFx Condition="$(TargetFx) == ''">net7.0</TargetFx>
+    <TargetFrameworks>$(TargetFx)</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <RootNamespace>GnomeStack</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>Shell Runner Script Bash PowerShell Sh Ruby Deno Process Diagnostics</PackageTags>
+    <Description>
+      Provides a simple way to run inline shell scripts or files from C#.
+    </Description>
+    <PackageReleaseNotes Condition="Exists('$(MSBuildProjectDirectory)/CHANGELOG.md')">
+      $([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/CHANGELOG.md"))
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Condition="Exists('README.md')" Include="README.md" Pack="true" PackagePath="\"/>
+    <None Condition="Exists('LICENSE.md')" Include="LICENSE.md" Pack="true" PackagePath="\"/>
+    <None Condition="Exists('$(IconPath)')" Include="$(IconPath)" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>$(AssemblyName).Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(NetLegacy)' == 'true'">
+    <PackageReference Include="Polyfill" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\*.csproj" />
+  </ItemGroup>
+</Project>
