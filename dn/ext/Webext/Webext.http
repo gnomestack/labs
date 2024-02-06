@@ -1,0 +1,6 @@
+@Webext_HostAddress = http://localhost:5150
+
+GET {{Webext_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
